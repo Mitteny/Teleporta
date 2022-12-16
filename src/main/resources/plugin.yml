@@ -1,0 +1,24 @@
+name: Teleporta
+description: 传送到其他玩家，设置传送点等传送指令。
+main: me.shjibi.teleporta.Main
+version: 1.0.0
+api-version: 1.19
+
+
+commands:
+  location:
+    description: 向全世界/某个人发送你的坐标
+    aliases: [zuobiao, zb]
+  tpa:
+    description: 申请传送
+  tpahere:
+    description: 申请拉人
+    aliases: [tpah]
+  tpaccept:
+    description: 同意传送请求
+  tpadeny:
+    description: 拒绝传送请求
+  tpacancel:
+    description: 撤回你的传送请求
+  warp:
+    description: 传送点相关指令
