@@ -1,14 +1,14 @@
-package me.shjibi.teleporta.commands.location;
+package top.shjibi.teleporta.commands.location;
 
-import me.shjibi.teleporta.Main;
-import me.shjibi.teleporta.base.PlayerCommandHandler;
+import top.shjibi.teleporta.Main;
+import top.shjibi.teleporta.base.PlayerCommandHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
-import static me.shjibi.teleporta.util.StringUtil.color;
+import static top.shjibi.teleporta.util.StringUtil.color;
 
 public final class CommandLocation extends PlayerCommandHandler {
 

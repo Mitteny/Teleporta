@@ -1,4 +1,4 @@
-package me.shjibi.teleporta.base;
+package top.shjibi.teleporta.base;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

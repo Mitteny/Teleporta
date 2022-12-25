@@ -1,10 +1,10 @@
-package me.shjibi.teleporta.util;
+package top.shjibi.teleporta.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.shjibi.teleporta.Main;
+import top.shjibi.teleporta.Main;
 
 import java.io.File;
 import java.io.IOException;

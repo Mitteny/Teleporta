@@ -1,20 +1,19 @@
-package me.shjibi.teleporta.base;
+package top.shjibi.teleporta.base;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import top.shjibi.teleporta.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static me.shjibi.teleporta.util.StringUtil.color;
 
 
 /** 玩家指令(只有玩家才可以使用的指令) */
 public abstract class PlayerCommandHandler extends BaseCommandHandler {
 
-    private static final String NOT_PLAYER_MESSAGE = color("&c该指令只能由玩家执行");
+    private static final String NOT_PLAYER_MESSAGE = StringUtil.color("&c该指令只能由玩家执行");
 
     public PlayerCommandHandler(JavaPlugin plugin, String name, int minArgs, String usage) {
         super(plugin, name, minArgs, usage == null ? null : usage.split("\n"));

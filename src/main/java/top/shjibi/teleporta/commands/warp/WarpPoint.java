@@ -1,4 +1,4 @@
-package me.shjibi.teleporta.commands.warp;
+package top.shjibi.teleporta.commands.warp;
 
 
 import com.google.gson.JsonObject;

@@ -1,4 +1,4 @@
-package me.shjibi.teleporta.base;
+package top.shjibi.teleporta.base;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -26,7 +26,6 @@ public abstract class BaseCommandHandler implements TabExecutor {
     /** 注册指令 */
     public void register() {
         PluginCommand command = Objects.requireNonNull(plugin.getCommand(name));
-        System.out.println("注册了" + command.getName() + "指令");
         command.setExecutor(this);
         command.setTabCompleter(this);
     }

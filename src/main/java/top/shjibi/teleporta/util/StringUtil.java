@@ -1,4 +1,4 @@
-package me.shjibi.teleporta.util;
+package top.shjibi.teleporta.util;
 
 import java.util.regex.Pattern;
 
@@ -11,7 +11,7 @@ public final class StringUtil {
 
     /** 给消息染色 */
     public static String color(String s) {
-        return stripPattern.matcher(s).replaceAll("§$1");
+        return colorPattern.matcher(s).replaceAll("§$1");
     }
 
     public static String strip(String s) {

@@ -1,7 +1,7 @@
-package me.shjibi.teleporta;
+package top.shjibi.teleporta;
 
 
-import me.shjibi.teleporta.util.CommandManager;
+import top.shjibi.teleporta.util.CommandManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {

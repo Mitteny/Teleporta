@@ -1,10 +1,10 @@
-package me.shjibi.teleporta.util;
+package top.shjibi.teleporta.util;
 
-import me.shjibi.teleporta.Main;
-import me.shjibi.teleporta.base.BaseCommandHandler;
-import me.shjibi.teleporta.commands.CommandTPA;
-import me.shjibi.teleporta.commands.location.CommandLocation;
-import me.shjibi.teleporta.commands.warp.CommandWarp;
+import top.shjibi.teleporta.Main;
+import top.shjibi.teleporta.base.BaseCommandHandler;
+import top.shjibi.teleporta.commands.tpa.CommandTPA;
+import top.shjibi.teleporta.commands.location.CommandLocation;
+import top.shjibi.teleporta.commands.warp.CommandWarp;
 
 import java.util.logging.Level;
 

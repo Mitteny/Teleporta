@@ -1,11 +1,12 @@
-package me.shjibi.teleporta.commands.warp;
+package top.shjibi.teleporta.commands.warp;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import me.shjibi.teleporta.Main;
-import me.shjibi.teleporta.base.PlayerCommandHandler;
-import me.shjibi.teleporta.util.PlayerData;
+import top.shjibi.teleporta.Main;
+import top.shjibi.teleporta.base.PlayerCommandHandler;
+import top.shjibi.teleporta.commands.warp.WarpPoint;
+import top.shjibi.teleporta.util.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
@@ -14,14 +15,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static me.shjibi.teleporta.util.StringUtil.color;
+import static top.shjibi.teleporta.util.StringUtil.color;
 
 public class CommandWarp extends PlayerCommandHandler {
 
     private static final PlayerData data = new PlayerData("warp_points");
 
     public CommandWarp() {
-        super(Main.getInstance(), "warp", 2, color("&c/warp <to/add/remove> <传送点名字>"));
+        super(Main.getInstance(), "warp", 1, color("&c/warp <to/add/remove> <传送点名字>"));
     }
 
     @Override
@@ -92,7 +93,7 @@ public class CommandWarp extends PlayerCommandHandler {
                 }
                 break;
             default:
-                pointObj = getWarpPoint(p, args[0]);
+                pointObj = getWarpPoint(p, operation);
                 point = WarpPoint.fromJson(pointObj);
                 if (pointObj != null) {
                     p.teleport(point.location());

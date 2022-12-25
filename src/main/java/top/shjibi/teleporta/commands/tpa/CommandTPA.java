@@ -1,27 +1,27 @@
-package me.shjibi.teleporta.commands;
+package top.shjibi.teleporta.commands.tpa;
 
-import me.shjibi.teleporta.Main;
-import me.shjibi.teleporta.base.PlayerCommandHandler;
-import me.shjibi.teleporta.commands.tpa.*;
-import net.md_5.bungee.api.chat.*;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import top.shjibi.teleporta.Main;
+import top.shjibi.teleporta.base.PlayerCommandHandler;
+import top.shjibi.teleporta.util.StringUtil;
 
 import java.util.Objects;
 
-import static me.shjibi.teleporta.commands.tpa.TeleportType.HERE;
-import static me.shjibi.teleporta.commands.tpa.TeleportType.THERE;
-import static me.shjibi.teleporta.util.StringUtil.color;
-import static me.shjibi.teleporta.util.StringUtil.strip;
+import static top.shjibi.teleporta.commands.tpa.TeleportType.HERE;
+import static top.shjibi.teleporta.commands.tpa.TeleportType.THERE;
 
 public final class CommandTPA extends PlayerCommandHandler {
 
 
     public CommandTPA() {
-        super(Main.getInstance(), "tpa", 1, color("&c用法: /$label <玩家>"));
+        super(Main.getInstance(), "tpa", 1, StringUtil.color("&c用法: /$label <玩家>"));
     }
 
 
@@ -31,17 +31,17 @@ public final class CommandTPA extends PlayerCommandHandler {
         Player target = Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {
-            p.sendMessage(color("&c该玩家不存在"));
+            p.sendMessage(StringUtil.color("&c该玩家不存在"));
             return;
         }
 
         if (target.isDead() && label.equalsIgnoreCase("tpaccept")) {
-            p.sendMessage(color("&c该玩家已死亡"));
+            p.sendMessage(StringUtil.color("&c该玩家已死亡"));
             return;
         }
 
         if (target.getName().equals(p.getName())) {
-            p.sendMessage(color("&c你不能对自己使用这条指令"));
+            p.sendMessage(StringUtil.color("&c你不能对自己使用这条指令"));
             return;
         }
 
@@ -68,20 +68,20 @@ public final class CommandTPA extends PlayerCommandHandler {
             Player to = result[1] ? p : target;
             TeleportRequest request = TPAManager.getInstance().getRequest(from, to, result[1] ? THERE : HERE);
             TPAManager.getInstance().removeRequest(request);
-            p.sendMessage(color("&c成功拒绝!"));
-            target.sendMessage(color("&c对方已拒绝!"));
+            p.sendMessage(StringUtil.color("&c成功拒绝!"));
+            target.sendMessage(StringUtil.color("&c对方已拒绝!"));
         } else if (label.equalsIgnoreCase("tpacancel")) {
             boolean[] results = checkRequest(p, target, false);
             if (!results[0]) {
-                p.sendMessage(color("&c你没有向对方发送过传送请求!"));
+                p.sendMessage(StringUtil.color("&c你没有向对方发送过传送请求!"));
                 return;
             }
             Player from = results[1] ? p : target;
             Player to = results[1] ? target : p;
             TeleportType type = results[1] ? THERE : HERE;
             TPAManager.getInstance().removeRequest(new TeleportRequest(from.getName(), to.getName(), 0L, type));
-            p.sendMessage(color("&7成功撤回对&e" + target.getName() + "&7的传送请求!"));
-            target.sendMessage(color("&e" + p.getName() + "&7已撤回对你的传送请求!"));
+            p.sendMessage(StringUtil.color("&7成功撤回对&e" + target.getName() + "&7的传送请求!"));
+            target.sendMessage(StringUtil.color("&e" + p.getName() + "&7已撤回对你的传送请求!"));
         }
     }
 
@@ -107,13 +107,13 @@ public final class CommandTPA extends PlayerCommandHandler {
             }
             TPAManager.getInstance().addRequest(request);
         } else {
-            p.sendMessage(color("&c你已经给该玩家发送过" + (typeBool ? "传送" : "拉人") + "请求了"));
+            p.sendMessage(StringUtil.color("&c你已经给该玩家发送过" + (typeBool ? "传送" : "拉人") + "请求了"));
             return;
         }
 
-        TextComponent senderMessage = new TextComponent(color(typeBool ? "&a你给&6" + target.getName() + "&a发送了传送请求!" : "&9你给&6" + target.getName() + "&9发送了拉人请求!"));
-        TextComponent cancel = new TextComponent(color("&7[撤回]"));
-        cancel.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(color("&8&o点击撤回"))));
+        TextComponent senderMessage = new TextComponent(StringUtil.color(typeBool ? "&a你给&6" + target.getName() + "&a发送了传送请求!" : "&9你给&6" + target.getName() + "&9发送了拉人请求!"));
+        TextComponent cancel = new TextComponent(StringUtil.color("&7[撤回]"));
+        cancel.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(StringUtil.color("&8&o点击撤回"))));
         cancel.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpacancel " + target.getName()));
         senderMessage.addExtra("   ");
         senderMessage.addExtra(cancel);
@@ -121,18 +121,18 @@ public final class CommandTPA extends PlayerCommandHandler {
         String receiverMessage = typeBool ? "&6" + p.getName() + "&a给你发送了传送请求" : "&6" + p.getName() + "&9给你发送了拉人请求";
 
         p.spigot().sendMessage(senderMessage);
-        target.sendMessage(color(receiverMessage));
+        target.sendMessage(StringUtil.color(receiverMessage));
 
 
         // 发送同意/拒绝
-        TextComponent accept = new TextComponent(color("&a[同意]"));
-        accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(color("&2&o点击同意"))));
+        TextComponent accept = new TextComponent(StringUtil.color("&a[同意]"));
+        accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(StringUtil.color("&2&o点击同意"))));
         accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpaccept " + p.getName()));
 
-        int length = strip(receiverMessage).length();
+        int length = StringUtil.strip(receiverMessage).length();
 
-        TextComponent deny = new TextComponent(color("&c[拒绝]"));
-        deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(color("&4&o点击拒绝"))));
+        TextComponent deny = new TextComponent(StringUtil.color("&c[拒绝]"));
+        deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(StringUtil.color("&4&o点击拒绝"))));
         deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpadeny " + p.getName()));
 
         TextComponent whiteSpace = new TextComponent(String.format("%" + length + "s", ""));
@@ -151,13 +151,13 @@ public final class CommandTPA extends PlayerCommandHandler {
         TeleportRequest request = TPAManager.getInstance().getRequest(from, to, type);
         boolean result = request != null && request.accept();
         if (!result)
-            from.sendMessage(color((request != null ? "&a对方已下线" : "&c请求已过期")));
+            from.sendMessage(StringUtil.color((request != null ? "&a对方已下线" : "&c请求已过期")));
         else {
             boolean typeBool = type == THERE;
             String fromMessage = typeBool ? "&a已传送至&6" + to.getName() + "&a!" : "&9已同意&6" + to.getName() + "&9的拉人请求!";
             String toMessage = typeBool ? "&a已同意&6" + from.getName() + "&a的传送请求!" : "&9已将&6" + from.getName() + "&9拉到了你的位置!";
-            from.sendMessage(color(fromMessage));
-            to.sendMessage(color(toMessage));
+            from.sendMessage(StringUtil.color(fromMessage));
+            to.sendMessage(StringUtil.color(toMessage));
         }
 
         TPAManager.getInstance().removeRequest(request);
@@ -174,7 +174,7 @@ public final class CommandTPA extends PlayerCommandHandler {
         boolean exists = (typeBool = TPAManager.getInstance().containsRequest(reqSender, receiver, THERE)) ||
                 TPAManager.getInstance().containsRequest(receiver, reqSender, HERE);
 
-        if (!exists && message) receiver.sendMessage(color("&c该&6传送&c/&9拉人&c请求不存在或已过期!"));
+        if (!exists && message) receiver.sendMessage(StringUtil.color("&c该&6传送&c/&9拉人&c请求不存在或已过期!"));
         return new boolean[]{exists, typeBool};
     }
 

@@ -1,6 +1,6 @@
-package me.shjibi.teleporta.commands.tpa;
+package top.shjibi.teleporta.commands.tpa;
 
-import me.shjibi.teleporta.Main;
+import top.shjibi.teleporta.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
