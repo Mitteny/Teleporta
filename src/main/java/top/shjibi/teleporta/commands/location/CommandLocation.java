@@ -1,25 +1,29 @@
 package top.shjibi.teleporta.commands.location;
 
-import top.shjibi.teleporta.Main;
-import top.shjibi.teleporta.base.PlayerCommandHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import top.shjibi.plugineer.command.base.CommandInfo;
+import top.shjibi.plugineer.command.base.PlayerCommand;
 
-import static top.shjibi.teleporta.util.StringUtil.color;
-
-public final class CommandLocation extends PlayerCommandHandler {
+import static top.shjibi.plugineer.util.StringUtil.color;
 
 
-    public CommandLocation() {
-        super(Main.getInstance(), "location", 0, null);
+@CommandInfo(name = "location")
+public final class CommandLocation extends PlayerCommand {
+
+
+    public CommandLocation(JavaPlugin plugin) {
+        super(plugin);
     }
 
     /* 向全世界/某个人发送的坐标及所在维度 */
     @Override
-    protected void execute(Player p, Command command, String s, String[] args) {
+    public void execute(@NotNull Player p, @NotNull Command command,@NotNull String s, String[] args) {
         Location loc = p.getLocation();
         String world = getWorldName(p.getWorld());
 

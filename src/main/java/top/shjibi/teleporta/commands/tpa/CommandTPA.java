@@ -8,26 +8,28 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-import top.shjibi.teleporta.Main;
-import top.shjibi.teleporta.base.PlayerCommandHandler;
-import top.shjibi.teleporta.util.StringUtil;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import top.shjibi.plugineer.command.base.CommandInfo;
+import top.shjibi.plugineer.command.base.PlayerCommand;
+import top.shjibi.plugineer.util.StringUtil;
 
 import java.util.Objects;
 
 import static top.shjibi.teleporta.commands.tpa.TeleportType.HERE;
 import static top.shjibi.teleporta.commands.tpa.TeleportType.THERE;
 
-public final class CommandTPA extends PlayerCommandHandler {
+@CommandInfo(name = "tpa", minArgs = 1)
+public final class CommandTPA extends PlayerCommand {
 
 
-    public CommandTPA() {
-        super(Main.getInstance(), "tpa", 1, StringUtil.color("&c用法: /$label <玩家>"));
+    public CommandTPA(JavaPlugin plugin) {
+        super(plugin);
     }
-
 
     /* 处理tpa, tpahere, tpaccept, tpadeny, tpacancel */
     @Override
-    protected void execute(Player p, Command command, String label, String[] args) {
+    public void execute(@NotNull Player p, @NotNull Command command, @NotNull String label, String[] args) {
         Player target = Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {

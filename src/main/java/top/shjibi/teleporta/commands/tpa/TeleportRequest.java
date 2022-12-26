@@ -2,7 +2,8 @@ package top.shjibi.teleporta.commands.tpa;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import top.shjibi.teleporta.util.StringUtil;
+
+import static top.shjibi.plugineer.util.StringUtil.color;
 
 /** 代表了一个传送请求,包含了起始地(Player),目的地(Player),请求时间(long),以及类型(TeleportType) */
 public record TeleportRequest(String from, String to, long start, TeleportType type) {
@@ -15,10 +16,6 @@ public record TeleportRequest(String from, String to, long start, TeleportType t
 
     public Player getTo() {
         return Bukkit.getPlayerExact(this.to);
-    }
-
-    public TeleportType getType() {
-        return type;
     }
 
     public boolean accept() {
@@ -38,8 +35,8 @@ public record TeleportRequest(String from, String to, long start, TeleportType t
         boolean typeBool = (type == TeleportType.THERE);
         Player reqSender = typeBool ? getFrom() : getTo();
         Player receiver = typeBool ? getTo() : getFrom();
-        reqSender.sendMessage(StringUtil.color("&7你发送给&e" + receiver.getName() + "&7的请求已过期!"));
-        receiver.sendMessage(StringUtil.color("&e" + reqSender.getName() + "&7发送你的请求已过期!"));
+        reqSender.sendMessage(color("&7你发送给&e" + receiver.getName() + "&7的请求已过期!"));
+        receiver.sendMessage(color("&e" + reqSender.getName() + "&7发送你的请求已过期!"));
     }
 
     @Override

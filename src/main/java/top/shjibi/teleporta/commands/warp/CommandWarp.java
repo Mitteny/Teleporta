@@ -3,32 +3,34 @@ package top.shjibi.teleporta.commands.warp;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import top.shjibi.teleporta.Main;
-import top.shjibi.teleporta.base.PlayerCommandHandler;
-import top.shjibi.teleporta.commands.warp.WarpPoint;
-import top.shjibi.teleporta.util.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import top.shjibi.plugineer.command.base.CommandInfo;
+import top.shjibi.plugineer.command.base.PlayerCommand;
+import top.shjibi.teleporta.util.PlayerData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static top.shjibi.teleporta.util.StringUtil.color;
+import static top.shjibi.plugineer.util.StringUtil.color;
 
-public class CommandWarp extends PlayerCommandHandler {
+@CommandInfo(name = "warp", minArgs = 1, usage = {"&c用法: ", "&c/%s <传送点/add/remove/to> <传送点>"})
+public class CommandWarp extends PlayerCommand {
 
     private static final PlayerData data = new PlayerData("warp_points");
 
-    public CommandWarp() {
-        super(Main.getInstance(), "warp", 1, color("&c/warp <to/add/remove> <传送点名字>"));
+    public CommandWarp(JavaPlugin plugin) {
+        super(plugin);
     }
 
     @Override
-    protected void execute(Player p, Command command, String label, String[] args) {
+    public void execute(Player p, @NotNull Command command, @NotNull String label, String[] args) {
         String operation = args[0];
-        String warpName = args[1];
+        String warpName = args.length > 1 ? args[1] : args[0];
         UUID uuid = p.getUniqueId();
         JsonObject pointObj = getWarpPoint(p, warpName);
         WarpPoint point = WarpPoint.fromJson(pointObj);
@@ -39,7 +41,7 @@ public class CommandWarp extends PlayerCommandHandler {
 
                 if (warps == null || warps.isEmpty()) {
                     data.addData(uuid, new WarpPoint(warpName, p.getLocation()).toJson());
-                    p.sendMessage(color( "&a成功建立了传送点&6" + warpName + "&a!"));
+                    p.sendMessage(color("&a成功建立了传送点&6" + warpName + "&a!"));
                 } else {
                     for (JsonElement warp : warps) {
 
@@ -55,10 +57,10 @@ public class CommandWarp extends PlayerCommandHandler {
                     int count = 10;
 
                     if (warps.size() >= count) {
-                        p.sendMessage(color(  "&c你最多建立" + count + "个传送点!"));
+                        p.sendMessage(color("&c你最多建立" + count + "个传送点!"));
                     } else {
                         data.addData(uuid, new WarpPoint(warpName, p.getLocation()).toJson());
-                        p.sendMessage(color( "&a成功建立了传送点&6" + warpName + "&a!"));
+                        p.sendMessage(color("&a成功建立了传送点&6" + warpName + "&a!"));
                     }
                 }
                 break;
@@ -93,7 +95,7 @@ public class CommandWarp extends PlayerCommandHandler {
                 }
                 break;
             default:
-                pointObj = getWarpPoint(p, operation);
+                pointObj = getWarpPoint(p, warpName);
                 point = WarpPoint.fromJson(pointObj);
                 if (pointObj != null) {
                     p.teleport(point.location());
@@ -105,7 +107,7 @@ public class CommandWarp extends PlayerCommandHandler {
     }
 
     @Override
-    public List<String> completeTab(Player p, Command command, String label, String[] args) {
+    public List<String> completeTab(@NotNull Player p, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1) {
             return List.of("to", "add", "remove");
         } else if (args.length == 2) {
