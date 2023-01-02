@@ -44,6 +44,14 @@ public class WarpData extends Data {
         return null;
     }
 
+    public JsonObject getJsonObject(Player p, String warpName) {
+        for (JsonElement json : getPointsArray(p)) {
+            if (json instanceof JsonObject obj && WarpPoint.fromJson(obj).name().equals(warpName))
+                return obj;
+        }
+        return null;
+    }
+
     public boolean addWarpPoint(Player p, WarpPoint point) {
         UUID uuid = p.getUniqueId();
         if (!getData().containsKey(uuid)) {
@@ -61,8 +69,8 @@ public class WarpData extends Data {
 
     public boolean removeWarpPoint(Player p, String warpName) {
         if (!warpPointExists(p, warpName)) return false;
-        getPointsArray(p).remove(getWarpPoint(p, warpName).toJson());
-        return true;
+        JsonObject obj = getJsonObject(p, warpName);
+        return getPointsArray(p).remove(obj);
     }
 
     public boolean warpPointExists(Player p, String warpName) {

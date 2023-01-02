@@ -1,7 +1,7 @@
 name: Teleporta
 description: 传送到其他玩家，设置传送点等传送指令。
 main: top.shjibi.teleporta.Main
-version: 1.0.2
+version: 1.0.3
 api-version: 1.19
 
 
