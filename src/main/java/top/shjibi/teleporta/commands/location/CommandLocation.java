@@ -10,6 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import top.shjibi.plugineer.command.base.CommandInfo;
 import top.shjibi.plugineer.command.base.PlayerCommand;
 
+import java.util.Collections;
+import java.util.List;
+
 import static top.shjibi.plugineer.util.StringUtil.color;
 
 
@@ -41,6 +44,11 @@ public final class CommandLocation extends PlayerCommand {
             Bukkit.broadcastMessage(color("&6" + p.getName() + "&a向全服公布了自己的&e坐标: "));
             Bukkit.broadcastMessage(message);
         }
+    }
+
+    @Override
+    public List<String> completeTab(@NotNull Player p, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        return Collections.emptyList();
     }
 
     public static String getWorldName(World world) {

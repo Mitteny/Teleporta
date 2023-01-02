@@ -20,6 +20,7 @@ public final class Main extends JavaPlugin {
         /* 指令管理者实例 */
         CommandManager commandManager = CommandManager.newInstance(instance, CommandTPA.class, CommandWarp.class, CommandLocation.class);
         commandManager.register();
+
         getLogger().info("已注册指令~");
     }
 
