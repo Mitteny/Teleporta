@@ -35,7 +35,7 @@ public final class CommandLocation extends PlayerCommand {
         if (args.length >= 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null) {
-                p.sendMessage(color("&a玩家") + args[0] + "&c不存在!");
+                p.sendMessage(color("&a玩家" + args[0] + "&c不存在!"));
                 return;
             }
             target.sendMessage(color("&6" + p.getName() + "&a向&9你&a公布了自己的&e坐标: "));
