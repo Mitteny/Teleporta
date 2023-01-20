@@ -7,17 +7,11 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 管理TPA请求,指令等 */
 public final class TPAManager {
 
     private TPAManager() {
         requests = new ArrayList<>();
     }
-
-    public static final String[] commands = {
-            "tpa", "tpahere", "tpaccept", "tpadeny", "tpacancel"
-    };
-
     private static TPAManager instance;
 
     private final List<TeleportRequest> requests;

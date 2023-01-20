@@ -1,7 +1,7 @@
 package top.shjibi.teleporta.commands.tpa;
 
 
-/** 一个枚举类,代表了传送类型 */
+/** Just 2 TeleportTypes: tpa(THERE) and tpahere(HERE) */
 public enum TeleportType {
 
     HERE, THERE

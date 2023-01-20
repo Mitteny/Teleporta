@@ -30,7 +30,7 @@ public record WarpPoint(String name, Location location) {
         JsonObject obj = new JsonObject();
         obj.addProperty("name", name);
         JsonObject loc = new JsonObject();
-        loc.addProperty("world", Objects.requireNonNull(location.getWorld(), "世界为空!").getName());
+        loc.addProperty("world", Objects.requireNonNull(location.getWorld(), "World is null!").getName());
         loc.addProperty("x", location.getX());
         loc.addProperty("y", location.getY());
         loc.addProperty("z", location.getZ());

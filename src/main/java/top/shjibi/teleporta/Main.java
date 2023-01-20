@@ -4,37 +4,32 @@ package top.shjibi.teleporta;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.shjibi.plugineer.command.CommandManager;
 import top.shjibi.teleporta.commands.location.CommandLocation;
-import top.shjibi.teleporta.commands.tpa.CommandTPA;
+import top.shjibi.teleporta.commands.tpa.CommandCreateRequest;
+import top.shjibi.teleporta.commands.tpa.CommandProcessRequest;
 import top.shjibi.teleporta.commands.warp.CommandWarp;
+import top.shjibi.teleporta.config.MessageManager;
 
 public final class Main extends JavaPlugin {
 
-    /**
-     * 唯一的实例
-     */
-    private static Main instance;
-
     @Override
     public void onEnable() {
-        instance = this;
-        /* 指令管理者实例 */
-        CommandManager commandManager = CommandManager.newInstance(instance, CommandTPA.class, CommandWarp.class, CommandLocation.class);
+        // Command manager instance
+        CommandManager commandManager = CommandManager.getInstance(getInstance(),
+                CommandCreateRequest.class, CommandProcessRequest.class,
+                CommandWarp.class, CommandLocation.class);
         commandManager.register();
 
-        getLogger().info("已注册指令~");
+        getLogger().info(getDescription().getFullName() + " is enabled");
     }
 
     @Override
     public void onDisable() {
         CommandWarp.saveData();
-        instance = null;
-        getLogger().info("已保存数据~");
+        getLogger().info(getDescription().getFullName() + " is disabled");
     }
 
-    /**
-     * 获取插件实例
-     */
+    // Get the instance of plugin
     public static JavaPlugin getInstance() {
-        return instance;
+        return getPlugin(Main.class);
     }
 }

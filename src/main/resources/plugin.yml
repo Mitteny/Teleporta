@@ -1,24 +1,22 @@
 name: Teleporta
-description: 传送到其他玩家，设置传送点等传送指令。
+description: Some useful commands for teleporting.
 main: top.shjibi.teleporta.Main
-version: 1.0.4
+version: ${project.version}
 api-version: 1.19
 
 
 commands:
   location:
-    description: 向全世界/某个人发送你的坐标
-    aliases: [zuobiao, zb]
+    description: Tell everyone / someone your coordinate and world.
   tpa:
-    description: 申请传送
+    description: send a teleport request to another player
   tpahere:
-    description: 申请拉人
-    aliases: [tpah]
+    description: send a teleport here request to another player
   tpaccept:
-    description: 同意传送请求
+    description: accept one's teleport request
   tpadeny:
-    description: 拒绝传送请求
+    description: deny one's teleport request
   tpacancel:
-    description: 撤回你的传送请求
+    description: recall your teleport request
   warp:
-    description: 传送点相关指令
+    description: add / remove / teleport to a warp point
