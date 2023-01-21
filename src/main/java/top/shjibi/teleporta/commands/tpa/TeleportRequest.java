@@ -4,18 +4,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import top.shjibi.teleporta.config.MessageManager;
 
-import static top.shjibi.plugineer.util.StringUtil.color;
+import java.util.UUID;
 
 /**
  * A teleport request
  */
-public record TeleportRequest(String from, String to, long start, TeleportType type) {
+public record TeleportRequest(UUID from, UUID to, long start, TeleportType type) {
 
     public static final int REMOVE_DELAY = 60;
-    private static final MessageManager manager = MessageManager.getInstance();
+    private static final MessageManager messenger = MessageManager.get();
 
     public boolean accept() {
-        Player to = Bukkit.getPlayerExact(this.to);
+        Player to = Bukkit.getPlayer(this.to);
         Player from = Bukkit.getPlayer(this.from);
         if (from == null || to == null) return false;
         if (shouldRemove()) return false;
@@ -29,12 +29,14 @@ public record TeleportRequest(String from, String to, long start, TeleportType t
 
     public void sendRemoveMessage() {
         boolean typeBool = (type == TeleportType.THERE);
-        String senderName = typeBool ? from : to;
-        String receiverName = typeBool ? to : from;
-        Player reqSender = Bukkit.getPlayerExact(senderName);
-        Player receiver = Bukkit.getPlayerExact(receiverName);
-        if (reqSender != null) reqSender.sendMessage(manager.getMessage("tpa.outdated_hint_1", receiverName));
-        if (receiver != null) receiver.sendMessage(manager.getMessage("tpa.outdated_hint_2", senderName));
+        UUID senderID = typeBool ? from : to;
+        UUID receiverID = typeBool ? to : from;
+        Player sender = Bukkit.getPlayer(senderID);
+        Player receiver = Bukkit.getPlayer(receiverID);
+        if (sender != null)
+            sender.sendMessage(messenger.getMessage("tpa.outdated_hint_1", Bukkit.getOfflinePlayer(receiverID).getName()));
+        if (receiver != null)
+            receiver.sendMessage(messenger.getMessage("tpa.outdated_hint_2", Bukkit.getOfflinePlayer(senderID).getName()));
     }
 
     @Override
@@ -42,7 +44,8 @@ public record TeleportRequest(String from, String to, long start, TeleportType t
         if (!(other instanceof TeleportRequest request)) return false;
         return from.equals(request.from) &&
                 to.equals(request.to) &&
-                type == request.type;
+                type == request.type &&
+                start == request.start;
     }
 
 }

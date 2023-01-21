@@ -3,16 +3,10 @@ package top.shjibi.teleporta.commands.warp;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.entity.Player;
 import top.shjibi.plugineer.config.Data;
 import top.shjibi.teleporta.Main;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

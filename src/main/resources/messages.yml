@@ -1,0 +1,51 @@
+world:
+  # Names of world
+  unknown: Unknown
+  overworld: Overworld
+  nether: The Nether
+  the_end: The End
+general:
+  # General command messages
+  no_such_player: '&cPlayer named %s doesn''t exist!'
+  dead_player: '&cThe player is dead!'
+  invalid_target: '&cThe target can''t be yourself!'
+  offline_player: '&cThe player is offline!'
+location:
+  # Location command messages
+  told: '&aYou told &6%s &ayour &elocation.'
+  tell_you: '&6%s &atold &6you &atheir &elocation:'
+  tell_server: '&6%s &atold &aeveryone their &elocation:'
+  message: '&bWorld: &e%s, Coordinates: &6[&b%d&e, &b%d&e, &b%d&6]'
+tpa:
+  # Accepting TPA messages
+  accept: '&a[Accept]'
+  accept_hint: '&2&oClick to accept.'
+  accept_tpa: '&aAccepted &6%s&a''s tpa request!'
+  accept_tpahere: '&9Accepted &6%s&9''s tpahere request!'
+  get_accepted_tpa: '&aTeleported to &6%s&a!'
+  get_accepted_tpahere: '&9Teleported &6%s &9to you!'
+  # Denying TPA messages
+  deny: '&c[Deny]'
+  deny_hint: '&4&oClick to deny.'
+  deny_request: '&cDenied %s''s request!'
+  get_denied: '%c%s denied your request!'
+  # Canceling TPA messages
+  cancel: '&7[Cancel]'
+  cancel_hint: '&8&oClick to cancel.'
+  cancel_tpa: '&7Canceled your request to &e%s&7!'
+  get_canceled: '&e%s &7canceled their request to you!'
+  # Other TPA messages
+  no_such_request: '&cThis request is outdated or doesn''t exist!'
+  already_sent: '&cYou already sent a request!'
+  receive_tpa: '&6%s &asent you a tpa request'
+  receive_tpahere: '&6%s &9sent you a tpahere request'
+  send_tpa: '&aYou sent a tpa request to &6%s&a!'
+  send_tpahere: '&9You sent a tpahere request to &6%s%a!'
+warp:
+  # Warp command messages
+  warp_limit: '&cYou can only have %d warp points at most!'
+  created: '&aSuccessfully created warp point ''%s''!'
+  removed: '&aSuccessfully removed warp point ''%s''!'
+  already_exists: '&cWarp point ''%s'' already exists!'
+  no_such_point: '&cWarp point ''%s'' doesn''t exist!'
+  teleported: '&aTeleported to ''%s''!'

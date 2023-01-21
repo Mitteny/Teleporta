@@ -1,17 +1,18 @@
 package top.shjibi.teleporta.commands.tpa;
 
-import top.shjibi.teleporta.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import top.shjibi.teleporta.Main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public final class TPAManager {
 
     private TPAManager() {
         requests = new ArrayList<>();
     }
+
     private static TPAManager instance;
 
     private final List<TeleportRequest> requests;
@@ -21,20 +22,10 @@ public final class TPAManager {
         return instance;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean containsRequest(TeleportRequest request) {
-        for(TeleportRequest each : requests) {
-            if(each.equals(request)) return true;
-        }
-        return false;
-    }
-
-    public boolean containsRequest(Player from, Player to, TeleportType type) {
-        return containsRequest(new TeleportRequest(from.getName(), to.getName(), 0L, type));
-    }
-
-    public boolean containsRequestExactly(TeleportRequest request) {
-        for(TeleportRequest each : requests) {
-            if(each.equals(request) && each.start() == request.start()) return true;
+        for (TeleportRequest each : requests) {
+            if (each.equals(request)) return true;
         }
         return false;
     }
@@ -42,7 +33,7 @@ public final class TPAManager {
     public void addRequest(TeleportRequest request) {
         requests.add(request);
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            if (!containsRequestExactly(request)) return;
+            if (!containsRequest(request)) return;
             request.sendRemoveMessage();
             requests.remove(request);
         }, TeleportRequest.REMOVE_DELAY * 20);
@@ -52,9 +43,11 @@ public final class TPAManager {
         requests.remove(request);
     }
 
-    public TeleportRequest getRequest(Player from, Player to, TeleportType type) {
-        for(TeleportRequest each : requests) {
-            if(each.equals(new TeleportRequest(from.getName(), to.getName(), 0L, type))) return each;
+    public TeleportRequest getRequest(UUID from, UUID to, TeleportType type) {
+        for (TeleportRequest request : requests) {
+            if (request.from().equals(from) && request.to().equals(to) && request.type() == type) {
+                return request;
+            }
         }
         return null;
     }

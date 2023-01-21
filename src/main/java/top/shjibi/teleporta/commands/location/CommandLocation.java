@@ -20,11 +20,10 @@ import static top.shjibi.plugineer.util.StringUtil.color;
 @CommandInfo(name = "location")
 public final class CommandLocation extends PlayerCommandHandler {
 
-    private final MessageManager messenger;
+    private static final MessageManager messenger = MessageManager.get();
 
     public CommandLocation(JavaPlugin plugin) {
         super(plugin);
-        messenger = MessageManager.getInstance();
     }
 
     @Override
@@ -42,10 +41,11 @@ public final class CommandLocation extends PlayerCommandHandler {
                 return;
             }
 
+            p.sendMessage(messenger.getMessage("location.told", target.getName()));
             target.sendMessage(messenger.getMessage("location.tell_you", p.getName()));
             target.sendMessage(message);
         } else {
-            Bukkit.broadcastMessage(messenger.getMessage("location.tell_server"));
+            Bukkit.broadcastMessage(messenger.getMessage("location.tell_server", p.getName()));
             Bukkit.broadcastMessage(message);
         }
     }
