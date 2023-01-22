@@ -8,3 +8,8 @@ Some useful commands for teleporting.
 - tpadeny: deny one's teleport request
 - tpacancel: recall your teleport request
 - warp: add / remove / teleport to a warp point
+
+TODOs
+
+- Add a custom config that allows users to modify different things.
+- Upload to spigotmc
