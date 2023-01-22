@@ -12,4 +12,5 @@ Some useful commands for teleporting.
 TODOs
 
 - Add a custom config that allows users to modify different things.
-- Upload to spigotmc
+- ~~Upload to spigotmc~~
+- Test and support more versions
