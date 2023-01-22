@@ -1,7 +1,7 @@
 # Teleporta
 Some useful commands for teleporting.
 
-- location: Tell everyone / someone your coordinate and world.
+- location: Tell everyone / someone your location.
 - tpa: send a teleport request to another player
 - tpahere send a teleport here request to another player
 - tpaccept: accept one's teleport request
