@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import top.shjibi.plugineer.config.Data;
 import top.shjibi.teleporta.Main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -24,7 +25,10 @@ public class WarpData extends Data {
     }
 
     public List<WarpPoint> getWarpPoints(Player p) {
-        return getPointsArray(p).asList().stream()
+        JsonArray pointsArray = getPointsArray(p);
+        List<JsonElement> points = new ArrayList<>();
+        pointsArray.forEach(points::add);
+        return points.stream()
                 .filter(x -> x instanceof JsonObject)
                 .map(x -> WarpPoint.fromJson((JsonObject) x))
                 .collect(Collectors.toList());

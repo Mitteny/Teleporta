@@ -2,7 +2,7 @@ name: Teleporta
 description: Some useful commands for teleporting.
 main: top.shjibi.teleporta.Main
 version: ${project.version}
-api-version: 1.19
+api-version: 1.16
 
 
 commands:

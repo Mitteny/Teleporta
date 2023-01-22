@@ -10,7 +10,7 @@ import top.shjibi.teleporta.commands.warp.CommandWarp;
 
 public final class Main extends JavaPlugin {
 
-    private static final boolean DEV_MODE = true;
+    private static final boolean DEV_MODE = false;
 
     @Override
     public void onEnable() {
@@ -32,6 +32,7 @@ public final class Main extends JavaPlugin {
         return getPlugin(Main.class);
     }
 
+    // If dev mod is enabled, more commands for debug will be enabled.
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isDevMode() {
         return DEV_MODE;
