@@ -40,7 +40,7 @@ tpa:
   receive_tpa: '&6%s &asent you a tpa request'
   receive_tpahere: '&6%s &9sent you a tpahere request'
   send_tpa: '&aYou sent a tpa request to &6%s&a!'
-  send_tpahere: '&9You sent a tpahere request to &6%s%a!'
+  send_tpahere: '&9You sent a tpahere request to &6%s&a!'
 warp:
   # Warp command messages
   warp_limit: '&cYou can only have %d warp points at most!'

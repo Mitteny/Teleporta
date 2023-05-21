@@ -63,6 +63,7 @@ public abstract class RequestCommandHandler extends PlayerCommandHandler {
             return Bukkit.getOnlinePlayers().stream()
                     .map(Player::getName)
                     .filter(x -> !x.equals(p.getName()))
+                    .filter(x -> x.startsWith(args[0]))
                     .toList();
         }
         return Collections.emptyList();
