@@ -52,6 +52,13 @@ public final class CommandLocation extends PlayerCommandHandler {
 
     @Override
     public List<String> completeTab(@NotNull Player p, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (args.length == 1) {
+            return Bukkit.getOnlinePlayers().stream()
+                    .map(Player::getName)
+                    .filter(x -> !x.equals(p.getName()))
+                    .filter(x -> x.toLowerCase().startsWith(args[0].toLowerCase()))
+                    .toList();
+        }
         return Collections.emptyList();
     }
 
